@@ -1,0 +1,16 @@
+language: python
+python:
+- 3.8.12
+services:
+- postgresql
+install:
+- psql -c 'create database django_db owner postgres;' -U postgres
+- pip install -r requirements.txt
+script:
+- python manage.py migrate
+deploy:
+  provider: heroku
+  deploy:
+  api_key:
+    secure:
+  app: nikitin
